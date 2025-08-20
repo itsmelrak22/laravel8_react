@@ -14,10 +14,34 @@ This is a full-stack application built with Laravel 8 and ReactJS that allows ma
 
 ### Prerequisites
 
-- PHP 8.0 or higher
+- PHP 7.4 
 - Composer
 - Node.js 16 or higher
 - MySQL database
+
+
+### How to Setup PHP 7.4 with Laragon
+
+#### Step 1: Install Laragon and PHP 7.4
+1. Download and install Laragon from: [https://laragon.org/download](https://laragon.org/download)
+2. Download PHP 7.4.33 from: [PHP Downloads](https://php.watch/versions/7.4/releases/7.4.33#download)
+3. Extract the PHP 7.4 files to: `C:\laragon\bin\php\php-7.4.33\`
+
+#### Step 2: Configure Laragon
+1. Open Laragon → Click the Laragon icon
+2. Go to **Menu** → **Preferences** → **PHP**
+3. Click **"Refresh"** or restart Laragon completely
+4. Select **PHP 7.4** from the dropdown list and click **OK**
+
+#### Step 3: Restart Services
+1. Click Laragon icon → **Restart All**
+
+#### Step 4: Verify Installation
+```bash
+php --version
+```
+You should see PHP 7.4.x in the output.
+
 
 ### Backend Setup (Laravel)
 
@@ -141,7 +165,8 @@ npm run dev
 ## API Documentation
 
 ### Authentication
-Currently, the application doesn't require authentication.
+Currently, the application doesn't require authentication, but it's structured to easily add Laravel Sanctum or Passport for API authentication.
+
 ### API Endpoints Details
 
 #### Get All Roles
@@ -298,6 +323,10 @@ chmod -R 775 storage bootstrap/cache
 3. **Models**: Define relationships in models under `app/Models/`
 4. **Frontend**: Add new components in `resources/js/components/`
 
+### Code Style
+- Follow PSR-12 coding standards for PHP
+- Use ESLint and Prettier for JavaScript/React code
+- Follow Laravel naming conventions
 
 ### Testing
 ```bash
@@ -308,8 +337,60 @@ php artisan test
 npm test
 ```
 
+## Deployment
 
-### features
+### Production Deployment
+1. **Environment Setup**:
+   ```bash
+   cp .env.example .env.production
+   # Configure production database and settings
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   composer install --optimize-autoloader --no-dev
+   npm install --production
+   ```
+
+3. **Build Assets**:
+   ```bash
+   npm run build
+   ```
+
+4. **Optimize Laravel**:
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+5. **Set Permissions**:
+   ```bash
+   chmod -R 755 storage bootstrap/cache
+   ```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Create a Pull Request
+
+## License
+
+This project is open-sourced software licensed under the [MIT License](LICENSE).
+
+## Support
+
+If you encounter any issues or have questions:
+1. Check the troubleshooting section above
+2. Search existing issues in the repository
+3. Create a new issue with detailed information about the problem
+
+## Changelog
+
+### Version 1.0.0
 - Initial release with user and role management
 - React frontend with Tailwind CSS
 - Laravel 8 backend with RESTful API
