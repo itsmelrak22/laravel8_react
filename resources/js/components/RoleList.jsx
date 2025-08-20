@@ -23,7 +23,7 @@ function RoleList() {
         if (confirm('Are you sure you want to delete this role?')) {
             axios.delete(`/api/roles/${roleId}`)
                 .then(() => {
-                    fetchRoles(); // Refresh the list
+                    fetchRoles(); //Refresh the list
                     alert('Role deleted successfully!');
                 })
                 .catch(error => {
